@@ -25,7 +25,7 @@ const toggleShare = (postId: string | number) => {
 };
 
   return (
-    <div className={`flex h-vh ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'}`}>
+    <div className={`flex h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'}`}>
       {/* Sidebar */}
       <div 
         className={`fixed inset-y-0 left-0 transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform md:relative md:translate-x-0 w-64 p-5 space-y-6 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-md`}
