@@ -42,7 +42,7 @@ export default function Dashboard() {
           {darkMode ? <FiSun className="w-5 h-5 text-yellow-500" /> : <FiMoon className="w-5 h-5 text-gray-700" />}
         </button>
         <nav className="mt-6 space-y-4">
-          <a href="/" className={`block p-2 rounded-md hover:bg-gray-300 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`}>Home</a>
+          <Link href="/" className={`block p-2 rounded-md hover:bg-gray-300 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`}>Home</Link>
           <a href="attendance-records" className={`block p-2 rounded-md hover:bg-gray-300 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`}>Attendance Record</a>
           <a href="#" className={`block p-2 rounded-md hover:bg-gray-300 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`}>Library Record</a>
           <Link href="/take-attendance" className={`block p-2 rounded-md hover:bg-gray-300 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`}>
