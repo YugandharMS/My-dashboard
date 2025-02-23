@@ -34,16 +34,18 @@ export default function AttendanceRecordsPage() {
   };
 
   useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (sidebarOpen && !event.target.closest(".sidebar")) {
-        setSidebarOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleOutsideClick);
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, [sidebarOpen]);
+  const handleOutsideClick = (event: MouseEvent) => {  // Explicitly typing the event as MouseEvent
+    if (sidebarOpen && !event.target.closest(".sidebar")) {
+      setSidebarOpen(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleOutsideClick);
+
+  return () => {
+    document.removeEventListener("mousedown", handleOutsideClick);
+  };
+}, [sidebarOpen]);
 
   return (
     <div className={`flex h-100vh ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'}`}>
