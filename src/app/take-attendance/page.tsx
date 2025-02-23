@@ -14,12 +14,14 @@ export default function TakeAttendance() {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    const handleOutsideClick = (event) => {
+    const handleOutsideClick = (event: MouseEvent) => {  // Explicitly type the event as MouseEvent
       if (sidebarOpen && !event.target.closest(".sidebar")) {
         setSidebarOpen(false);
       }
     };
+  
     document.addEventListener("mousedown", handleOutsideClick);
+  
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
