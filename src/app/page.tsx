@@ -11,7 +11,7 @@ export default function Dashboard() {
   const router = useRouter();
   const [darkMode, setDarkMode] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [date, setDate] = useState(new Date());
+ 
   const [likedPosts, setLikedPosts] = useState({});
   const [shareOptions, setShareOptions] = useState(null);
 
