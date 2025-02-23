@@ -7,23 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import "react-datepicker/dist/react-datepicker.css";
 
-const MyComponent = () => {
   const [date, setDate] = useState<Date | null>(null); // Change state to allow null values
-
-  return (
-    <div className="mb-4">
-      <label className="block mb-2">Select Date:</label>
-      <DatePicker 
-        selected={date} 
-        onChange={(newDate: Date | null) => setDate(newDate)} // Handle null in onChange
-        className={`w-full p-2 border rounded-md ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-black'}`}
-        calendarClassName={darkMode ? 'bg-gray-700 text-white' : 'bg-white text-black'}
-        popperClassName={darkMode ? '!bg-gray-700 text-white' : '!bg-white text-black'}
-      />
-    </div>
-  );
-};
-
 
 export default function TakeAttendance() {
   const router = useRouter();
@@ -133,7 +117,15 @@ export default function TakeAttendance() {
               <option value="c">Class C</option>
             </select>
 
-            MyComponent();
+            <div className="mb-4">
+              <label className="block mb-2">Select Date:</label>
+              <DatePicker 
+                selected={date} 
+                onChange={(newDate: Date | null) => setDate(newDate)} // Handle null in onChange
+                className={`w-full p-2 border rounded-md ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-black'}`}
+                calendarClassName={darkMode ? 'bg-gray-700 text-white' : 'bg-white text-black'}
+                popperClassName={darkMode ? '!bg-gray-700 text-white' : '!bg-white text-black'}
+              />
           </div>
         </div>
 
