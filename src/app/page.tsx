@@ -13,7 +13,7 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
  
   
-  const [shareOptions, setShareOptions] = useState(null);
+
 
   const [likedPosts, setLikedPosts] = useState<Record<string | number, boolean>>({});
 const [shareOptions, setShareOptions] = useState<string | number | null>(null);
