@@ -34,8 +34,10 @@ export default function AttendanceRecordsPage() {
   };
 
   useEffect(() => {
-  const handleOutsideClick = (event: MouseEvent) => {  // Explicitly typing the event as MouseEvent
-    if (sidebarOpen && !event.target.closest(".sidebar")) {
+  const handleOutsideClick = (event: MouseEvent) => {
+    // Check if event.target is not null and is an element
+    const target = event.target as Element | null;
+    if (sidebarOpen && target && !target.closest(".sidebar")) {
       setSidebarOpen(false);
     }
   };
