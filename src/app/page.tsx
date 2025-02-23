@@ -12,7 +12,7 @@ export default function Dashboard() {
   const [darkMode, setDarkMode] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
  
-  const [likedPosts, setLikedPosts] = useState({});
+  
   const [shareOptions, setShareOptions] = useState(null);
 
   const [likedPosts, setLikedPosts] = useState<Record<string | number, boolean>>({});
