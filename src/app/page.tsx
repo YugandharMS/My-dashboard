@@ -15,7 +15,10 @@ export default function Dashboard() {
   const [likedPosts, setLikedPosts] = useState({});
   const [shareOptions, setShareOptions] = useState(null);
 
-  const toggleLike = (postId: string | number) => {
+  const [likedPosts, setLikedPosts] = useState<Record<string | number, boolean>>({});
+const [shareOptions, setShareOptions] = useState<string | number | null>(null);
+
+const toggleLike = (postId: string | number) => {
   setLikedPosts((prev) => ({ ...prev, [postId]: !prev[postId] }));
 };
 
