@@ -14,8 +14,10 @@ export default function TakeAttendance() {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {  // Explicitly type the event as MouseEvent
-      if (sidebarOpen && !event.target.closest(".sidebar")) {
+    const handleOutsideClick = (event: MouseEvent) => {
+      // Ensure event.target is not null and is an Element
+      const target = event.target as Element | null;
+      if (sidebarOpen && target && !target.closest(".sidebar")) {
         setSidebarOpen(false);
       }
     };
@@ -26,6 +28,7 @@ export default function TakeAttendance() {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [sidebarOpen]);
+
 
   return (
     <div className={`flex h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'}`}>
