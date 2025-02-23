@@ -15,13 +15,13 @@ export default function Dashboard() {
   const [likedPosts, setLikedPosts] = useState({});
   const [shareOptions, setShareOptions] = useState(null);
 
-  const toggleLike = (postId) => {
-    setLikedPosts((prev) => ({ ...prev, [postId]: !prev[postId] }));
-  };
+  const toggleLike = (postId: string | number) => {
+  setLikedPosts((prev) => ({ ...prev, [postId]: !prev[postId] }));
+};
 
-  const toggleShare = (postId) => {
-    setShareOptions(shareOptions === postId ? null : postId);
-  };
+const toggleShare = (postId: string | number) => {
+  setShareOptions(shareOptions === postId ? null : postId);
+};
 
   return (
     <div className={`flex h-vh ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'}`}>
