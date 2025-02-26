@@ -97,11 +97,7 @@ export default function ProfilePage() {
             Take Attendance
           </Link>
         </nav>
-        <div className="mt-auto">
-          <Link href="#" className="font-semibold">
-            Profile Name
-          </Link>
-        </div>
+        
       </aside>
 
       {/* Sidebar for Mobile (Slide Over) */}
@@ -144,11 +140,7 @@ export default function ProfilePage() {
                   Take Attendance
                 </Link>
               </nav>
-              <div className="mt-auto">
-                <Link href="#" className="font-semibold">
-                  Profile Name
-                </Link>
-              </div>
+              
             </div>
           </div>
         )}
