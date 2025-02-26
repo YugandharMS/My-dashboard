@@ -105,45 +105,54 @@ export default function ProfilePage() {
       </aside>
 
       {/* Sidebar for Mobile (Slide Over) */}
-      <div
-        className={`fixed inset-y-0 left-0 z-40 w-64 p-5 space-y-6 shadow-md transform transition-transform md:hidden ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } ${darkMode ? "bg-gray-800" : "bg-white"}`}
-      >
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold">College Connect</h2>
-          <button onClick={() => setDarkMode(!darkMode)} className="p-2">
-            {darkMode ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
-          </button>
-        </div>
-        <nav className="mt-6 space-y-4">
-          <Link
-            href="/"
-            className="block p-2 rounded-md hover:bg-gray-300"
+        {sidebarOpen && (
+          <div 
+            className="fixed inset-0 z-30 bg-black bg-opacity-50 md:hidden" 
             onClick={() => setSidebarOpen(false)}
           >
-            Home
-          </Link>
-          <Link
-            href="/attendance-records"
-            className="block p-2 rounded-md hover:bg-gray-300"
-            onClick={() => setSidebarOpen(false)}
-          >
-            Attendance Record
-          </Link>
-          <Link href="#" className="block p-2 rounded-md hover:bg-gray-300" onClick={() => setSidebarOpen(false)}>
-            Library Record
-          </Link>
-          <Link href="#" className="block p-2 rounded-md hover:bg-gray-300" onClick={() => setSidebarOpen(false)}>
-            Take Attendance
-          </Link>
-        </nav>
-        <div className="mt-auto">
-          <Link href="#" className="font-semibold">
-            Profile Name
-          </Link>
-        </div>
-      </div>
+            <div
+              className={`fixed inset-y-0 left-0 z-40 w-64 p-5 space-y-6 shadow-md transform transition-transform ${
+                sidebarOpen ? "translate-x-0" : "-translate-x-full"
+              } ${darkMode ? "bg-gray-800" : "bg-white"}`}
+              onClick={(e) => e.stopPropagation()} // Prevents sidebar from closing when clicking inside it
+            >
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold">College Connect</h2>
+                <button onClick={() => setDarkMode(!darkMode)} className="p-2">
+                  {darkMode ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
+                </button>
+              </div>
+              <nav className="mt-6 space-y-4">
+                <Link
+                  href="/"
+                  className="block p-2 rounded-md hover:bg-gray-300"
+                  onClick={() => setSidebarOpen(false)}
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/attendance-records"
+                  className="block p-2 rounded-md hover:bg-gray-300"
+                  onClick={() => setSidebarOpen(false)}
+                >
+                  Attendance Record
+                </Link>
+                <Link href="#" className="block p-2 rounded-md hover:bg-gray-300" onClick={() => setSidebarOpen(false)}>
+                  Library Record
+                </Link>
+                <Link href="#" className="block p-2 rounded-md hover:bg-gray-300" onClick={() => setSidebarOpen(false)}>
+                  Take Attendance
+                </Link>
+              </nav>
+              <div className="mt-auto">
+                <Link href="#" className="font-semibold">
+                  Profile Name
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
