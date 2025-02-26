@@ -13,6 +13,8 @@ import {
   FiHome,
   FiMessageCircle,
   FiPlusCircle,
+  FiHeart,
+  FiShare2,
 } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,6 +37,7 @@ export default function ProfilePage() {
   const [darkMode, setDarkMode] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"posts" | "attendance" | "library">("posts");
+  const [selectedPost, setSelectedPost] = useState<number | null>(null);
 
   // Example data
   const posts = Array(9).fill(null);
@@ -45,7 +48,7 @@ export default function ProfilePage() {
     labels: ["Present", "Late", "Absent"],
     datasets: [
       {
-        data: [70, 15, 15], // Demo percentages
+        data: [70, 15, 15],
         backgroundColor: ["#34D399", "#FACC15", "#EF4444"],
         hoverBackgroundColor: ["#10B981", "#EAB308", "#DC2626"],
       },
@@ -57,7 +60,7 @@ export default function ProfilePage() {
     datasets: [
       {
         label: "Attendance %",
-        data: [85, 75, 90, 65, 80], // Demo values
+        data: [85, 75, 90, 65, 80],
         backgroundColor: "#3B82F6",
       },
     ],
@@ -76,12 +79,10 @@ export default function ProfilePage() {
       >
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">College Connect</h2>
-          {/* Dark Mode Toggle */}
           <button onClick={() => setDarkMode(!darkMode)} className="p-2">
             {darkMode ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
           </button>
         </div>
-
         <nav className="mt-6 space-y-4">
           <Link href="/" className="block p-2 rounded-md hover:bg-gray-300">
             Home
@@ -96,7 +97,6 @@ export default function ProfilePage() {
             Take Attendance
           </Link>
         </nav>
-
         <div className="mt-auto">
           <Link href="#" className="font-semibold">
             Profile Name
@@ -112,12 +112,10 @@ export default function ProfilePage() {
       >
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">College Connect</h2>
-          {/* Dark Mode Toggle */}
           <button onClick={() => setDarkMode(!darkMode)} className="p-2">
             {darkMode ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
           </button>
         </div>
-
         <nav className="mt-6 space-y-4">
           <Link
             href="/"
@@ -140,7 +138,6 @@ export default function ProfilePage() {
             Take Attendance
           </Link>
         </nav>
-
         <div className="mt-auto">
           <Link href="#" className="font-semibold">
             Profile Name
@@ -156,12 +153,9 @@ export default function ProfilePage() {
             darkMode ? "bg-gray-800" : "bg-white"
           }`}
         >
-          {/* Mobile Toggle Button */}
           <button className="md:hidden p-2" onClick={() => setSidebarOpen(!sidebarOpen)}>
             <FiMenu className={`w-6 h-6 ${darkMode ? "text-white" : "text-black"}`} />
           </button>
-
-          {/* Search Bar */}
           <div className="flex items-center bg-gray-200 p-2 rounded-md w-full max-w">
             <FiSearch className="text-gray-500 mr-2" />
             <input
@@ -170,67 +164,125 @@ export default function ProfilePage() {
               className={`bg-transparent outline-none w-full ${darkMode ? "text-white" : "text-black"}`}
             />
           </div>
-
-          {/* Notifications */}
           <button className="p-2">
             <FiBell className={`w-6 h-6 ${darkMode ? "text-white" : "text-black"}`} />
           </button>
         </header>
 
-        {/* Profile Content */}
-        <main className="flex-1 overflow-y-auto">
-          {/* Profile Header */}
-          <div className={`p-4 ${darkMode ? "bg-gray-800" : "bg-white"}`}>
-            <div className="flex items-center gap-4">
-              <div className="w-20 h-20 rounded-full border-2 border-blue-500 p-1">
-                <Image
-                  src="/placeholder-user.jpg"
-                  alt="Profile"
-                  width={80}
-                  height={80}
-                  className="rounded-full"
-                />
+        {/* Main section: fixed header area and scrollable content */}
+        <main className="flex-1 flex flex-col overflow-hidden">
+          {/* Fixed Profile Header & Navigation Tabs */}
+          <div className="shrink-0">
+            <div className={`p-4 ${darkMode ? "bg-gray-800" : "bg-white"}`}>
+              <div className="flex items-center gap-4">
+                <div className="w-20 h-20 rounded-full border-2 border-blue-500 p-1">
+                  <Image
+                    src="/placeholder-user.jpg"
+                    alt="Profile"
+                    width={80}
+                    height={80}
+                    className="rounded-full"
+                  />
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-xl font-bold">John Doe</h2>
+                  <p className="text-sm text-gray-500">Computer Science Student</p>
+                </div>
               </div>
-              <div className="flex-1">
-                <h2 className="text-xl font-bold">John Doe</h2>
-                <p className="text-sm text-gray-500">Computer Science Student</p>
-              </div>
+            </div>
+            <div className={`flex border-b ${darkMode ? "border-gray-700" : "border-gray-200"}`}>
+              {["posts", "attendance", "library"].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab as "posts" | "attendance" | "library")}
+                  className={`flex-1 p-4 flex items-center justify-center gap-2 ${
+                    activeTab === tab ? "border-b-2 border-blue-500 text-blue-500" : ""
+                  }`}
+                >
+                  {tab === "posts" && <FiGrid />}
+                  {tab === "attendance" && <FiClipboard />}
+                  {tab === "library" && <FiBook />}
+                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Navigation Tabs */}
-          <div className={`flex border-b ${darkMode ? "border-gray-700" : "border-gray-200"}`}>
-            {["posts", "attendance", "library"].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab as "posts" | "attendance" | "library")}
-                className={`flex-1 p-4 flex items-center justify-center gap-2 ${
-                  activeTab === tab ? "border-b-2 border-blue-500 text-blue-500" : ""
-                }`}
-              >
-                {tab === "posts" && <FiGrid />}
-                {tab === "attendance" && <FiClipboard />}
-                {tab === "library" && <FiBook />}
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              </button>
-            ))}
-          </div>
-
-          {/* Content Sections */}
-          <div className="flex-1 pb-16">
+          {/* Scrollable Content Section */}
+          <div className="flex-1 overflow-y-auto pb-16">
             {activeTab === "posts" && (
-              <div className="grid grid-cols-3 gap-1 p-1">
-                {posts.map((_, index) => (
-                  <div key={index} className="aspect-square relative">
-                    <Image
-                      src={`/placeholder-${index % 3}.jpg`}
-                      alt="Post"
-                      fill
-                      className="object-cover"
-                    />
+              <>
+                {/* Post Grid */}
+                <div className="grid grid-cols-3 gap-1 p-1">
+                  {posts.map((_, index) => (
+                    <div
+                      key={index}
+                      className="aspect-square relative cursor-pointer"
+                      onClick={() => setSelectedPost(index)}
+                    >
+                      <Image
+                        src={`/placeholder-${index % 3}.png`}
+                        alt="Post"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Modal for Full Post */}
+                {selectedPost !== null && (
+                  <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4"
+                    onClick={() => setSelectedPost(null)}
+                  >
+                    <div
+                      className={`relative w-full md:max-w-[800px] h-full md:h-auto p-4 rounded-lg ${
+                        darkMode ? "bg-gray-800" : "bg-white"
+                      }`}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <button
+                        onClick={() => setSelectedPost(null)}
+                        className="absolute top-2 right-2 text-gray-700 dark:text-gray-300 text-2xl"
+                      >
+                        &times;
+                      </button>
+                      {/* Responsive Modal Content */}
+                      <div className="flex flex-col md:flex-row">
+                        {/* Image Section */}
+                        <div className="relative w-full aspect-square md:w-2/3">
+                          <Image
+                            src={`/placeholder-${selectedPost % 3}.png`}
+                            alt="Full Post"
+                            fill
+                            className="object-cover rounded-md"
+                          />
+                        </div>
+                        {/* Description & Buttons Section */}
+                        <div className="w-full md:w-1/3 flex flex-col justify-between p-4">
+                          <div className="mb-4">
+                            <p className="text-sm">
+                              This is a sample description of the post. It provides details about the post content,
+                              context, and any other relevant information.
+                            </p>
+                          </div>
+                          <div className="flex gap-4">
+                            <button className="flex items-center gap-1 text-blue-500">
+                              <FiHeart className="w-5 h-5" />
+                              Like
+                            </button>
+                            <button className="flex items-center gap-1 text-blue-500">
+                              <FiShare2 className="w-5 h-5" />
+                              Share
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                ))}
-              </div>
+                )}
+              </>
             )}
 
             {activeTab === "attendance" && (
